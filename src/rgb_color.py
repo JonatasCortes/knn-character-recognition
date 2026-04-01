@@ -60,7 +60,7 @@ class RgbColorMap:
         try:
             return cls.__color_map[color]
         except KeyError:
-            warning = (f"\nWARNING: Invalid color value will be defaulted to {cls.__default_color}."
+            warning = (f"\nWARNING: Invalid color {color} will be defaulted to {cls.__default_color}."
                        f"\n         Please replace the given value with a valid one, acording to the availuable color map.\n")
             logging.warning(warning)
             return cls.__color_map["WHITE"]
