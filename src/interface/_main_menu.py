@@ -26,7 +26,7 @@ def main_menu_setup() -> Window:
         ]
     )
 
-    default_font = Font("times", 40)
+    default_font = Font("consolas", 40)
 
     header.add_children(
         Text("KNN CHARACTER RECOGNITION", default_font, "WHITE")
