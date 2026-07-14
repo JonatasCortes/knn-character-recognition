@@ -3,7 +3,7 @@ from desklab import Window, FlexBox, Text, Font, Color, Button
 from src.interface._utils import toggle_brightness_up
 
 
-def main_menu_setup() -> Window:
+def main_menu_setup(classify_menu: Window) -> Window:
 
     BASE_COLOR = Color((51, 36, 43))
 
@@ -13,8 +13,8 @@ def main_menu_setup() -> Window:
     HEADER_HEIGHT = 100
     BODY_HEIGHT = WINDOW_HEIGHT - HEADER_HEIGHT
 
-    OPTIONS_CONTAINER_WIDTH = int(WINDOW_WIDTH / 2)
-    OPTIONS_CONTAINER_HEIGHT = int(BODY_HEIGHT / 1.3)
+    BUTTONS_CONTAINER_WIDTH = int(WINDOW_WIDTH / 2)
+    BUTTONS_CONTAINER_HEIGHT = int(BODY_HEIGHT / 1.3)
 
     main_menu = Window()
     base = main_menu.add_layer()
@@ -33,14 +33,12 @@ def main_menu_setup() -> Window:
     )
 
     body.add_children(
-        options_container := FlexBox(OPTIONS_CONTAINER_WIDTH, OPTIONS_CONTAINER_HEIGHT,
-                                     space_between=24,
-                                     corners_radius=40,
-                                     color=BASE_COLOR)
+        buttons_container := FlexBox(BUTTONS_CONTAINER_WIDTH, BUTTONS_CONTAINER_HEIGHT,
+                                     space_between=24, corners_radius=40, color=BASE_COLOR)
     )
 
     buttons_text_corners_color_acion: list[tuple[str, tuple[int, int, int, int], tuple[int, ...], Callable[..., Any]]] = [
-        ("START", (20, 20, 0, 0), (255, 147, 23), lambda: ...),
+        ("START", (20, 20, 0, 0), (255, 147, 23), classify_menu.open),
         ("METRICS", (0, 0, 0, 0), (252, 70, 48), lambda: ...),
         ("EXIT", (0, 0, 20, 20), (227, 8, 66), main_menu.close)
     ]
@@ -49,11 +47,11 @@ def main_menu_setup() -> Window:
 
     for text, corners, color, action in buttons_text_corners_color_acion:
 
-        width = int(OPTIONS_CONTAINER_WIDTH / 1.2)
-        height = int(OPTIONS_CONTAINER_HEIGHT / 4.7)
+        width = int(BUTTONS_CONTAINER_WIDTH / 1.5)
+        height = int(BUTTONS_CONTAINER_HEIGHT / 4.7)
 
-        options_container.add_children(
-            button := Button(width, height, corners_radius=corners, color=color)
+        buttons_container.add_children(
+            button := Button(width, height, corners_radius=corners, color=color, trigger_actions_on_release=True)
         )
 
         text_color = button.get_color().lightened(70)
