@@ -2,7 +2,8 @@ from dataclasses import dataclass
 from functools import partial
 from typing import Any, Callable, Final
 from desklab import Button, Color, DrawingArea, FlexBox, Font, Text, Window
-from src.interface._utils import create_button_with_image, toggle_brightness_up
+from src.interface._utils import (create_button_with_image, toggle_brightness_up,
+                                  create_button_with_text, build_header)
 
 
 def classify_menu_setup() -> Window:
@@ -58,32 +59,12 @@ def classify_menu_setup() -> Window:
         corners_radius: tuple[int, int, int, int]
         action: Callable[[], Any]
 
-    def _create_styled_button(width: int, height: int, color: Color | str | tuple[int, ...], text: str, *, corners_radius: int | tuple[int, int, int, int] = 20, font_size: int = 30, action: Callable[[], Any] | None = None,) -> Button:
-        if action is None:
-            def _action(): return None
-            action = _action
-
-        button = Button(width, height, action,
-                        corners_radius=corners_radius,
-                        color=color)
-
-        toggle_brightness_up(button, 30)
-        button.add_children(Text(text, DEFAULT_FONT.copy(size=font_size),
-                                 button.get_color().lightened(90)))
-        return button
-
     def _create_display_box(width: int, height: int, color: Color | str | tuple[int, ...], text: str, font: Font, corners_radius: int | tuple[int, int, int, int] = 40,) -> FlexBox:
         display = FlexBox(width, height,
                           corners_radius=corners_radius,
                           color=color)
         display.add_children(Text(text, font, "WHITE"))
         return display
-
-    def _build_header(width: int) -> FlexBox:
-        header = FlexBox(width, HEADER_HEIGHT, color=BASE_COLOR)
-        header.add_children(Text("KNN CHARACTER RECOGNITION",
-                                 DEFAULT_FONT, "WHITE"))
-        return header
 
     def _build_color_palette(width: int, drawing_area: DrawingArea, palette_color: Color) -> FlexBox:
         color_palette = FlexBox(width, COLOR_PALETTE_HEIGHT, 0,
@@ -128,7 +109,7 @@ def classify_menu_setup() -> Window:
         )
         for spec in specs:
             buttons_container.add_children(
-                _create_styled_button(
+                create_button_with_text(
                     button_width, button_height, spec.color, spec.text,
                     corners_radius=spec.corners_radius, action=spec.action,
                 )
@@ -152,8 +133,8 @@ def classify_menu_setup() -> Window:
 
         modal_background.add_children([modal_header, modal_body])
 
-        close_modal_button = _create_styled_button(70, MODAL_HEADER_HEIGHT, INCORRECT_COLOR, "X",
-                                                   corners_radius=(10, 0, 0, 0), action=close_modal)
+        close_modal_button = create_button_with_text(70, MODAL_HEADER_HEIGHT, INCORRECT_COLOR, "X",
+                                                     corners_radius=(10, 0, 0, 0), action=close_modal)
 
         modal_title = Text(
             "CLASSIFICATION", DEFAULT_FONT.copy(size=30), "WHITE")
@@ -171,10 +152,10 @@ def classify_menu_setup() -> Window:
 
         verdict_buttons.add_children(
             [
-                _create_styled_button(verdict_button_width, VERDICT_BUTTON_HEIGHT,
-                                      CORRECT_COLOR, "CORRECT", corners_radius=(20, 0, 20, 0), font_size=30),
-                _create_styled_button(verdict_button_width, VERDICT_BUTTON_HEIGHT,
-                                      INCORRECT_COLOR, "INCORRECT", corners_radius=(0, 20, 0, 20), font_size=30),
+                create_button_with_text(verdict_button_width, VERDICT_BUTTON_HEIGHT,
+                                        CORRECT_COLOR, "CORRECT", corners_radius=(20, 0, 20, 0), font_size=30),
+                create_button_with_text(verdict_button_width, VERDICT_BUTTON_HEIGHT,
+                                        INCORRECT_COLOR, "INCORRECT", corners_radius=(0, 20, 0, 20), font_size=30),
             ]
         )
 
@@ -206,7 +187,7 @@ def classify_menu_setup() -> Window:
         drawing_area = DrawingArea(drawing_area_width, body_height, 0,
                                    BASE_COLOR.lightened(30), eraser_width=20)
 
-        header = _build_header(window_width)
+        header = build_header(window_width)
         color_palette = _build_color_palette(window_width, drawing_area,
                                              palette_color)
 

@@ -1,6 +1,16 @@
-from typing import Any, Callable
+from typing import Any, Callable, Final
+from desklab import FlexBox, Color, Font, HoverListener, Button, Image, Text
 
-from desklab import FlexBox, Color, HoverListener, Button, Image
+DEFAULT_FONT: Final[Font] = Font("consolas", 40)
+HEADER_HEIGHT: Final[int] = 100
+BASE_COLOR: Final[Color] = Color((51, 36, 43))
+
+
+def build_header(width: int) -> FlexBox:
+    header = FlexBox(width, HEADER_HEIGHT, color=BASE_COLOR)
+    header.add_children(Text("KNN CHARACTER RECOGNITION",
+                             DEFAULT_FONT, "WHITE"))
+    return header
 
 
 def toggle_color(flexbox: FlexBox, color: Color | str | tuple[int, ...]) -> None:
@@ -43,3 +53,18 @@ def create_button_with_image(image_path: str, width: int, height: int, color: Co
     )
     btn.add_actions(action)
     return btn
+
+
+def create_button_with_text(width: int, height: int, color: Color | str | tuple[int, ...], text: str, *, corners_radius: int | tuple[int, int, int, int] = 20, font_size: int = 30, action: Callable[[], Any] | None = None,) -> Button:
+    if action is None:
+        def _action(): return None
+        action = _action
+
+    button = Button(width, height, action,
+                    corners_radius=corners_radius,
+                    color=color)
+
+    toggle_brightness_up(button, 30)
+    button.add_children(Text(text, DEFAULT_FONT.copy(size=font_size),
+                             button.get_color().lightened(90)))
+    return button
