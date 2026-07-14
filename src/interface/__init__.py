@@ -1,8 +1,8 @@
+from ._constants import SETUP
 from ._classify_menu import classify_menu_setup
 from ._main_menu import main_menu_setup
-from desklab import Window
 
-Window.setup(width=1000, height=700, caption="knn-character-recognition")
+assert SETUP
 CLASSIFY_MENU = classify_menu_setup()
 MAIN_MENU = main_menu_setup(CLASSIFY_MENU)
 

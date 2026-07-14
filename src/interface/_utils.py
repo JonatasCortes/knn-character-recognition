@@ -1,9 +1,6 @@
-from typing import Any, Callable, Final
-from desklab import FlexBox, Color, Font, HoverListener, Button, Image, Text
-
-DEFAULT_FONT: Final[Font] = Font("consolas", 40)
-HEADER_HEIGHT: Final[int] = 100
-BASE_COLOR: Final[Color] = Color((51, 36, 43))
+from typing import Any, Callable
+from desklab import FlexBox, Color, HoverListener, Button, Image, Text
+from src.interface._constants import DEFAULT_FONT, BASE_COLOR, HEADER_HEIGHT
 
 
 def build_header(width: int) -> FlexBox:
@@ -13,7 +10,8 @@ def build_header(width: int) -> FlexBox:
     return header
 
 
-def toggle_color(flexbox: FlexBox, color: Color | str | tuple[int, ...]) -> None:
+def toggle_brightness_up(flexbox: FlexBox, intensity: int) -> None:
+    color = flexbox.get_color().lightened(intensity)
     default_color = flexbox.get_color()
 
     def _toggle():
@@ -22,14 +20,6 @@ def toggle_color(flexbox: FlexBox, color: Color | str | tuple[int, ...]) -> None
         else:
             flexbox.set_color(default_color)
     flexbox.add_children(HoverListener(flexbox, _toggle, on_change=True))
-
-
-def toggle_brightness_up(flexbox: FlexBox, intensity: int) -> None:
-    toggle_color(flexbox, flexbox.get_color().lightened(intensity))
-
-
-def toggle_luminance_emphasis(flexbox: FlexBox, intensity: int) -> None:
-    toggle_color(flexbox, flexbox.get_color().luminance_emphasized(intensity))
 
 
 def create_button_with_image(image_path: str, width: int, height: int, color: Color | str | tuple[int, ...], action: Callable[..., Any]) -> Button:
