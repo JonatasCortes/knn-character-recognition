@@ -2,7 +2,7 @@ from . import _constants as const
 from functools import partial
 from typing import Any, Callable
 from desklab import Button, Color, DrawingArea, FlexBox, Font, Text, Window
-from src.interface._constants import WINDOW_HEIGHT, WINDOW_WIDTH, BASE_COLOR, HEADER_HEIGHT
+from src.interface._constants import WINDOW_HEIGHT, WINDOW_WIDTH, BASE_COLOR, HEADER_HEIGHT, DEFAULT_FONT
 from src.interface._utils import (create_button_with_image, toggle_brightness_up,
                                   create_button_with_text, build_header)
 
@@ -102,7 +102,7 @@ def _build_classify_modal(modal_layer: FlexBox, close_modal: Callable[[], Any]) 
     )
 
     modal_title = Text(const.MODAL_TITLE_TEXT,
-                       const.DEFAULT_FONT.copy(
+                       DEFAULT_FONT.copy(
                            size=const.MODAL_TITLE_FONT_SIZE),
                        "WHITE")
     modal_header.add_children([close_modal_button, modal_title])

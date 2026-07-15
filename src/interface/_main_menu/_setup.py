@@ -41,7 +41,7 @@ def _build_buttons_container(width: int, height: int, actions: list[Callable[[],
     return container
 
 
-def main_menu_setup(classify_menu: Window) -> Window:
+def main_menu_setup(classify_menu: Window, metrics_menu: Window) -> Window:
     base_layer = main_menu.add_layer()
 
     header = build_header(WINDOW_WIDTH)
@@ -50,7 +50,7 @@ def main_menu_setup(classify_menu: Window) -> Window:
 
     buttons_actions: list[Callable[[], Any]] = [
         classify_menu.open,
-        lambda: ...,
+        metrics_menu.open,
         main_menu.close
     ]
 

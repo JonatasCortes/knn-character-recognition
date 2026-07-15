@@ -5,7 +5,6 @@ from desklab import Font
 CORRECT_COLOR: Final[tuple[int, int, int]] = (120, 208, 98)
 INCORRECT_COLOR: Final[tuple[int, int, int]] = (227, 8, 66)
 
-DEFAULT_FONT: Final[Font] = Font("consolas", 40)
 DISPLAY_FONT: Final[Font] = Font("trebuchet", 150)
 MODAL_TITLE_FONT_SIZE: Final[int] = 30
 VERDICT_BUTTON_FONT_SIZE: Final[int] = 30

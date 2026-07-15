@@ -52,7 +52,8 @@ def create_button_with_text(width: int, height: int, color: Color | str | tuple[
 
     button = Button(width, height, action,
                     corners_radius=corners_radius,
-                    color=color)
+                    color=color,
+                    trigger_actions_on_release=True)
 
     toggle_brightness_up(button, 30)
     button.add_children(Text(text, DEFAULT_FONT.copy(size=font_size),
