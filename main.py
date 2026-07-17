@@ -1,3 +1,3 @@
-from src.rgb_color import RgbColorMap
+from src.interface import MAIN_MENU
 
-RgbColorMap.get_color("")
+MAIN_MENU.open()
