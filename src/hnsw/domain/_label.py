@@ -14,6 +14,13 @@ class Label(str):
             raise ValueError("label must be an integer value between 0 and 46")
         super().__new__(cls, cls._decode(label))
 
+    def __init__(self, label: int) -> None:
+        self.__raw = label
+        super().__init__()
+
     @classmethod
     def _decode(cls, label: int) -> str:
         return cls._LABEL_MAP[label]
+
+    def get_raw(self) -> int:
+        return self.__raw
