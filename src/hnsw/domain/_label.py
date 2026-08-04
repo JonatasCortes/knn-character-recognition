@@ -9,10 +9,10 @@ class Label(str):
         41: 'h', 42: 'n', 43: 'q', 44: 'r', 45: 't', 46: 'u'
     }
 
-    def __new__(cls, label: int) -> None:
+    def __new__(cls, label: int) -> str:
         if label < 0 or label > 46:
             raise ValueError("label must be an integer value between 0 and 46")
-        super().__new__(cls, cls._decode(label))
+        return super().__new__(cls, cls._decode(label))
 
     def __init__(self, label: int) -> None:
         self.__raw = label
