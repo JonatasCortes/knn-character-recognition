@@ -1,3 +1,8 @@
+"""
+This module was adapted from the 'emnist' python package,
+available at https://github.com/hosford42/EMNIST
+"""
+
 import gzip
 import logging
 import os
