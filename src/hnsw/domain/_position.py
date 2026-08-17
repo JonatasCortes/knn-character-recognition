@@ -1,3 +1,5 @@
+from typing import Self
+
 import numpy as np
 
 
@@ -6,7 +8,7 @@ class Position(int):
     __SECTIONS = 28  # default dimension size for EMNIST dataset images
     __LUMINANCE_THRESHOLD = 100
 
-    def __new__(cls, image: np.ndarray) -> int:
+    def __new__(cls, image: np.ndarray) -> Self:
         return super().__new__(cls, cls.__calculate(image))
 
     @classmethod
