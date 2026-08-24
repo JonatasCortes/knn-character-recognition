@@ -2,8 +2,8 @@ from . import _constants as const
 from functools import partial
 from typing import Callable, Final
 from desklab import FlexBox, Text, Window, Button
-from src.interface._utils import create_button_with_text, build_header, toggle_brightness_up
-from src.interface._constants import WINDOW_WIDTH, BASE_COLOR, DEFAULT_FONT
+from interface._utils import create_button_with_text, build_header, toggle_brightness_up
+from interface._constants import WINDOW_WIDTH, BASE_COLOR, DEFAULT_FONT
 
 
 metrics_menu: Final[Window] = Window()

@@ -2,9 +2,9 @@ from . import _constants as const
 from functools import partial
 from typing import Any, Callable
 from desklab import Button, Color, DrawingArea, FlexBox, Font, Text, Window
-from src.interface._constants import WINDOW_HEIGHT, WINDOW_WIDTH, BASE_COLOR, HEADER_HEIGHT, DEFAULT_FONT
-from src.interface._utils import (create_button_with_image, toggle_brightness_up,
-                                  create_button_with_text, build_header)
+from interface._constants import WINDOW_HEIGHT, WINDOW_WIDTH, BASE_COLOR, HEADER_HEIGHT, DEFAULT_FONT
+from interface._utils import (create_button_with_image, toggle_brightness_up,
+                              create_button_with_text, build_header)
 
 
 def _create_display_box(width: int, height: int, color: Color | str | tuple[int, ...], text: str, font: Font, corners_radius: int | tuple[int, int, int, int] = const.CLASSIFICATION_DISPLAY_CORNERS_RADIUS,) -> FlexBox:
